@@ -25,7 +25,7 @@ public class Cliente extends Persona {
         return puntos;
     }
 
-    public void setFechaIngreso(Date fecha_ingreso) {
+    public void setFechaIngreso(Date fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 

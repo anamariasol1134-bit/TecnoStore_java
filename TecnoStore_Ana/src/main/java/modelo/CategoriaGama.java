@@ -24,4 +24,12 @@ public enum CategoriaGama {
     public String toString(){
         return descripcion;
     }
+    public static CategoriaGama desdeTexto(String texto) {
+    for (CategoriaGama g : values()) {
+        if (g.getDescripcion().equalsIgnoreCase(texto)) {
+            return g;
+        }
+    }
+    return null;
+}
 }
