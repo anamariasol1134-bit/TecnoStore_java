@@ -1,35 +1,38 @@
-
 package dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import modelo.Celular;
 import modelo.Cliente;
 import modelo.Empleado;
 import modelo.ItemVenta;
+import modelo.Marca;
 import modelo.Venta;
 import patron.ConexionDB;
+
 public class VentaDao {
+
     public void insertar(Venta v) {
         String sqlVenta = "INSERT INTO ventas (cliente_fk, empleado_fk, fecha, subtotal, iva, total) VALUES (?, ?, ?, ?, ?, ?)";
         String sqlItem  = "INSERT INTO detalle_venta (venta_fk, celular_fk, cantidad, precio_unitario, subtotal) VALUES (?, ?, ?, ?, ?)";
-        String sqlStock = "UPDATE celulares SET stock = stock - ? WHERE id = ?";
         String sqlLog   = "INSERT INTO log_celulares (celular_fk, empleado_fk, accion, detalle_cambio) VALUES (?, ?, ?, ?)";
 
         Connection con = ConexionDB.getInstancia().getConexion();
 
         try {
-            con.setAutoCommit(false); 
+            con.setAutoCommit(false);
 
             int idVenta;
             try (PreparedStatement ps = con.prepareStatement(sqlVenta, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, v.getCliente().getId());
                 ps.setInt(2, v.getEmpleado().getId());
-                ps.setDate(3, new java.sql.Date(v.getFecha().getTime()));
+                ps.setTimestamp(3, new Timestamp(v.getFecha().getTime()));
                 ps.setDouble(4, v.getSubtotal());
                 ps.setDouble(5, v.getIva());
                 ps.setDouble(6, v.getTotal());
@@ -42,7 +45,6 @@ public class VentaDao {
             }
 
             try (PreparedStatement psItem = con.prepareStatement(sqlItem);
-                 PreparedStatement psStock = con.prepareStatement(sqlStock);
                  PreparedStatement psLog = con.prepareStatement(sqlLog)) {
 
                 for (ItemVenta item : v.getItems()) {
@@ -53,10 +55,6 @@ public class VentaDao {
                     psItem.setDouble(5, item.getSubtotal());
                     psItem.executeUpdate();
 
-                    psStock.setInt(1, item.getCantidad());
-                    psStock.setInt(2, item.getCelular().getId());
-                    psStock.executeUpdate();
-
                     psLog.setInt(1, item.getCelular().getId());
                     psLog.setInt(2, v.getEmpleado().getId());
                     psLog.setString(3, "VENTA");
@@ -66,12 +64,12 @@ public class VentaDao {
                 }
             }
 
-            con.commit(); 
+            con.commit();
             System.out.println("Venta registrada con id " + idVenta);
 
         } catch (SQLException e) {
             try {
-                con.rollback(); 
+                con.rollback();
                 System.out.println("Transaccion revertida");
             } catch (SQLException ex) {
                 System.err.println("Error en rollback: " + ex.getMessage());
@@ -105,7 +103,7 @@ public class VentaDao {
             while (rs.next()) {
                 Venta v = new Venta();
                 v.setId(rs.getInt("id"));
-                v.setFecha(rs.getDate("fecha"));
+                v.setFecha(rs.getTimestamp("fecha"));
                 v.setSubtotal(rs.getDouble("subtotal"));
                 v.setIva(rs.getDouble("iva"));
                 v.setTotal(rs.getDouble("total"));
@@ -150,7 +148,7 @@ public class VentaDao {
                 if (rs.next()) {
                     v = new Venta();
                     v.setId(rs.getInt("id"));
-                    v.setFecha(rs.getDate("fecha"));
+                    v.setFecha(rs.getTimestamp("fecha"));
                     v.setSubtotal(rs.getDouble("subtotal"));
                     v.setIva(rs.getDouble("iva"));
                     v.setTotal(rs.getDouble("total"));
@@ -177,9 +175,11 @@ public class VentaDao {
     private List<ItemVenta> listarItemsDeVenta(int idVenta, Connection con) throws SQLException {
         List<ItemVenta> items = new ArrayList<>();
         String sql = "SELECT d.id, d.cantidad, d.precio_unitario, d.subtotal, " +
-                     "c.id AS celular_id, c.modelo AS celular_modelo " +
+                     "c.id AS celular_id, c.modelo AS celular_modelo, " +
+                     "m.id AS marca_id, m.nombre AS marca_nombre " +
                      "FROM detalle_venta d " +
                      "JOIN celulares c ON d.celular_fk = c.id " +
+                     "JOIN marca m ON c.marca_fk = m.id " +
                      "WHERE d.venta_fk = ?";
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -195,6 +195,12 @@ public class VentaDao {
                     Celular c = new Celular();
                     c.setId(rs.getInt("celular_id"));
                     c.setModelo(rs.getString("celular_modelo"));
+
+                    Marca m = new Marca();
+                    m.setId(rs.getInt("marca_id"));
+                    m.setNombre(rs.getString("marca_nombre"));
+                    c.setMarca(m);
+
                     item.setCelular(c);
 
                     items.add(item);

@@ -1,0 +1,75 @@
+===========================================
+       REPORTE DE VENTAS - TECNOSTORE
+===========================================
+
+Venta ID: 1
+Fecha: 2026-10-14 00:00:00
+Cliente: Juan Perez
+Empleado: Ana Suarez
+Items:
+  - Apple iPhone 15 x2 = $9.000.000
+Subtotal: $9.000.000
+IVA:      $1.710.000
+TOTAL:    $10.710.000
+-------------------------------------------
+
+Venta ID: 3
+Fecha: 2026-10-14 08:02:50
+Cliente: Juan Perez
+Empleado: Ana Suarez
+Items:
+  - gatito Galaxy S24 x1 = $3.800.000
+Subtotal: $3.800.000
+IVA:      $722.000
+TOTAL:    $4.522.000
+-------------------------------------------
+
+Venta ID: 4
+Fecha: 2026-10-14 08:31:43
+Cliente: Juan Perez
+Empleado: Ana Suarez
+Items:
+  - Xiaomi Redmi Note 13 x1 = $900.000
+Subtotal: $900.000
+IVA:      $171.000
+TOTAL:    $1.071.000
+-------------------------------------------
+
+Venta ID: 5
+Fecha: 2026-10-14 08:40:38
+Cliente: Juan Perez
+Empleado: Ana Suarez
+Items:
+  - gatito Galaxy S24 x1 = $3.800.000
+  - Apple iPhone 15 x2 = $9.000.000
+Subtotal: $12.800.000
+IVA:      $2.432.000
+TOTAL:    $15.232.000
+-------------------------------------------
+
+Venta ID: 6
+Fecha: 2026-10-14 10:34:49
+Cliente: Juan Perez
+Empleado: Ana Suarez
+Items:
+  - Apple 1 x5 = $2.800.000
+Subtotal: $2.800.000
+IVA:      $532.000
+TOTAL:    $3.332.000
+-------------------------------------------
+
+Venta ID: 7
+Fecha: 2026-10-14 11:07:33
+Cliente: ananana
+Empleado: Ana Suarez
+Items:
+  - Apple 1 x5 = $128.000
+  - Apple 1 x1 = $25.600
+Subtotal: $153.600
+IVA:      $29.184
+TOTAL:    $182.784
+-------------------------------------------
+
+===========================================
+TOTAL GENERAL DE VENTAS: $35.049.784
+===========================================

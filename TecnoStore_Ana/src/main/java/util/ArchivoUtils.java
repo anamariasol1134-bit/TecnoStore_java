@@ -3,15 +3,14 @@ package util;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import modelo.ItemVenta;
 import modelo.Venta;
 
 public class ArchivoUtils {
 
-    /**
-     * Genera el archivo reporte_ventas.txt con el resumen de todas las ventas.
-     */
     public static void generarReporteVentas(List<Venta> ventas, String nombreArchivo) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
 
@@ -23,7 +22,7 @@ public class ArchivoUtils {
 
             for (Venta v : ventas) {
                 writer.write("Venta ID: " + v.getId() + "\n");
-                writer.write("Fecha: " + v.getFecha() + "\n");
+                writer.write("Fecha: " + formatearFecha(v.getFecha()) + "\n");
                 writer.write("Cliente: " + v.getCliente().getNombre() + "\n");
                 writer.write("Empleado: " + v.getEmpleado().getNombre() + "\n");
                 writer.write("Items:\n");
@@ -32,19 +31,19 @@ public class ArchivoUtils {
                     writer.write("  - " + item.getCelular().getMarca().getNombre()
                                     + " " + item.getCelular().getModelo()
                                     + " x" + item.getCantidad()
-                                    + " = $" + item.getSubtotal() + "\n");
+                                    + " = " + formatearMoneda(item.getSubtotal()) + "\n");
                 }
 
-                writer.write("Subtotal: $" + v.getSubtotal() + "\n");
-                writer.write("IVA:      $" + v.getIva() + "\n");
-                writer.write("TOTAL:    $" + v.getTotal() + "\n");
+                writer.write("Subtotal: " + formatearMoneda(v.getSubtotal()) + "\n");
+                writer.write("IVA:      " + formatearMoneda(v.getIva()) + "\n");
+                writer.write("TOTAL:    " + formatearMoneda(v.getTotal()) + "\n");
                 writer.write("-------------------------------------------\n\n");
 
                 totalGeneral += v.getTotal();
             }
 
             writer.write("===========================================\n");
-            writer.write("TOTAL GENERAL DE VENTAS: $" + totalGeneral + "\n");
+            writer.write("TOTAL GENERAL DE VENTAS: " + formatearMoneda(totalGeneral) + "\n");
             writer.write("===========================================\n");
 
             System.out.println("Archivo generado: " + nombreArchivo);
@@ -52,5 +51,17 @@ public class ArchivoUtils {
         } catch (IOException e) {
             System.err.println("Error al generar archivo: " + e.getMessage());
         }
+    }
+
+    public static String formatearMoneda(double valor) {
+        NumberFormat formato = NumberFormat.getInstance(new Locale("es", "CO"));
+        formato.setMaximumFractionDigits(0);
+        return "$" + formato.format(valor);
+    }
+
+    public static String formatearFecha(java.util.Date fecha) {
+        if (fecha == null) return "";
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(fecha);
     }
 }
