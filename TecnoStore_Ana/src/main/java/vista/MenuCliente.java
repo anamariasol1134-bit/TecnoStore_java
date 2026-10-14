@@ -19,13 +19,25 @@ public class MenuCliente {
             opcion = Entero.leer("Elige: ");
 
             switch (opcion) {
-                case 1: ClienteControl.registrar(); break;
-                case 2: ClienteControl.listar(); break;
-                case 3: ClienteControl.buscar(); break;
-                case 4: ClienteControl.actualizar(); break;
-                case 5: ClienteControl.eliminar(); break;
-                case 6: break;
-                default: System.out.println("Opcion invalida");
+                case 1:
+                    ClienteControl.registrar();
+                    break;
+                case 2:
+                    ClienteControl.listar();
+                    break;
+                case 3:
+                    ClienteControl.buscar();
+                    break;
+                case 4:
+                    ClienteControl.actualizar();
+                    break;
+                case 5:
+                    ClienteControl.eliminar();
+                    break;
+                case 6:
+                    break;
+                default:
+                    System.out.println("Opcion invalida");
             }
         }
     }

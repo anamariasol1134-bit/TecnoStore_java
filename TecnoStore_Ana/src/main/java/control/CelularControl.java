@@ -15,6 +15,7 @@ import util.Validador;
 import vistaValidaciones.Decimal;
 import vistaValidaciones.Entero;
 import vistaValidaciones.Texto;
+import patron.FactoryCelular;
 
 public class CelularControl {
 
@@ -33,22 +34,22 @@ public class CelularControl {
             return;
         }
 
-        System.out.println("\n--- REGISTRAR CELULAR ---");
+        System.out.println("--- REGISTRAR CELULAR ---");
 
-        System.out.println("\nMarcas:");
+        System.out.println("Marcas:");
         for (int i = 0; i < marcas.size(); i++) {
             System.out.println((i + 1) + ". " + marcas.get(i).getNombre());
         }
         int idxMarca = Entero.leer("Elige: ") - 1;
 
-        System.out.println("\nSistemas:");
+        System.out.println("Sistemas:");
         for (int i = 0; i < sistemas.size(); i++) {
             SistemaOperativo s = sistemas.get(i);
             System.out.println((i + 1) + ". " + s.getNombre() + " " + s.getVersion());
         }
         int idxSo = Entero.leer("Elige: ") - 1;
 
-        System.out.println("\nGamas:");
+        System.out.println("Gamas:");
         for (int i = 0; i < gamas.size(); i++) {
             System.out.println((i + 1) + ". " + gamas.get(i));
         }
@@ -67,14 +68,12 @@ public class CelularControl {
             return;
         }
 
-        Celular c = new Celular();
-        c.setMarca(marcas.get(idxMarca));
-        c.setSistemaOperativo(sistemas.get(idxSo));
-        c.setGama(gamas.get(idxGama));
-        c.setModelo(modelo);
-        c.setPrecio(precio);
-        c.setStock(stock);
-        celularDao.insertar(c);
+            Celular c = FactoryCelular.crear(
+            marcas.get(idxMarca),
+            sistemas.get(idxSo),
+            gamas.get(idxGama),
+            modelo, precio, stock);
+            celularDao.insertar(c);
     }
 
     public static void listar() {
@@ -82,7 +81,7 @@ public class CelularControl {
         if (celulares.isEmpty()) {
             System.out.println("No hay celulares.");
         } else {
-            System.out.println("\n--- CELULARES ---");
+            System.out.println("--- CELULARES ---");
             for (Celular c : celulares) {
                 System.out.println("ID: " + c.getId() + " - " + c.getMarca().getNombre()
                         + " " + c.getModelo()
@@ -110,7 +109,7 @@ public class CelularControl {
             System.out.println("No hay celulares para actualizar.");
             return;
         }
-        System.out.println("\n--- CELULARES ---");
+        System.out.println("--- CELULARES ---");
         for (Celular c : celulares) {
             System.out.println("ID: " + c.getId() + " - " + c.getMarca().getNombre()
                     + " " + c.getModelo()
@@ -154,7 +153,7 @@ public class CelularControl {
             System.out.println("No hay celulares para eliminar.");
             return;
         }
-        System.out.println("\n--- CELULARES ---");
+        System.out.println("--- CELULARES ---");
         for (Celular c : celulares) {
             System.out.println("ID: " + c.getId() + " - " + c.getMarca().getNombre()
                     + " " + c.getModelo() + " - Stock: " + c.getStock());

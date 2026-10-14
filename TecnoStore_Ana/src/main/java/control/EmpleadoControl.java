@@ -16,7 +16,7 @@ public class EmpleadoControl {
     static EmpleadoDao empleadoDao = new EmpleadoDao();
 
     public static void registrar() {
-        System.out.println("\n--- REGISTRAR EMPLEADO ---");
+        System.out.println("--- REGISTRAR EMPLEADO ---");
         String nombre = Texto.leer("Nombre: ");
         String identificacion = Texto.leer("Identificacion: ");
 
@@ -58,7 +58,7 @@ public class EmpleadoControl {
         if (empleados.isEmpty()) {
             System.out.println("No hay empleados.");
         } else {
-            System.out.println("\n--- EMPLEADOS ---");
+            System.out.println("--- EMPLEADOS ---");
             for (Empleado e : empleados) {
                 System.out.println("ID: " + e.getId() + " - " + e.getNombre()
                         + " - " + e.getCargo()
@@ -84,20 +84,28 @@ public class EmpleadoControl {
             System.out.println("No hay empleados para actualizar.");
             return;
         }
-        System.out.println("\n--- EMPLEADOS ---");
+        System.out.println("--- EMPLEADOS ---");
         for (Empleado e : empleados) {
             System.out.println("ID: " + e.getId() + " - " + e.getNombre()
                     + " - " + e.getCargo()
                     + " - " + ArchivoUtils.formatearMoneda(e.getSalario()));
         }
         int id = Entero.leer("ID a actualizar (0 = cancelar): ");
-        if (id == 0) { System.out.println("Cancelada"); return; }
+        if (id == 0) {
+            System.out.println("Cancelada");
+            return;
+        }
 
         Empleado e = empleadoDao.buscarPorId(id);
-        if (e == null) { System.out.println("No existe."); return; }
+        if (e == null) {
+            System.out.println("No existe.");
+            return;
+        }
 
         String c = Texto.leer("Nuevo cargo (Enter = mantener): ");
-        if (!c.isEmpty()) e.setCargo(c);
+        if (!c.isEmpty()) {
+            e.setCargo(c);
+        }
 
         double s = Decimal.leer("Nuevo salario (0 = mantener): ");
         if (s > 0) {
@@ -119,16 +127,22 @@ public class EmpleadoControl {
             System.out.println("No hay empleados para eliminar.");
             return;
         }
-        System.out.println("\n--- EMPLEADOS ---");
+        System.out.println("--- EMPLEADOS ---");
         for (Empleado e : empleados) {
             System.out.println("ID: " + e.getId() + " - " + e.getNombre()
                     + " - " + e.getCargo());
         }
         int id = Entero.leer("ID a eliminar (0 = cancelar): ");
-        if (id == 0) { System.out.println("Cancelada"); return; }
+        if (id == 0) {
+            System.out.println("Cancelada");
+            return;
+        }
 
         Empleado e = empleadoDao.buscarPorId(id);
-        if (e == null) { System.out.println("No existe."); return; }
+        if (e == null) {
+            System.out.println("No existe.");
+            return;
+        }
 
         int op = Entero.leer("Confirma eliminar a " + e.getNombre() + "? (1=Si, 2=No): ");
         if (op == 1) {

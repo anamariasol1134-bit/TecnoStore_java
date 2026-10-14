@@ -19,13 +19,25 @@ public class MenuEmpleado {
             opcion = Entero.leer("Elige: ");
 
             switch (opcion) {
-                case 1: EmpleadoControl.registrar(); break;
-                case 2: EmpleadoControl.listar(); break;
-                case 3: EmpleadoControl.buscar(); break;
-                case 4: EmpleadoControl.actualizar(); break;
-                case 5: EmpleadoControl.eliminar(); break;
-                case 6: break;
-                default: System.out.println("Opcion invalida");
+                case 1:
+                    EmpleadoControl.registrar();
+                    break;
+                case 2:
+                    EmpleadoControl.listar();
+                    break;
+                case 3:
+                    EmpleadoControl.buscar();
+                    break;
+                case 4:
+                    EmpleadoControl.actualizar();
+                    break;
+                case 5:
+                    EmpleadoControl.eliminar();
+                    break;
+                case 6:
+                    break;
+                default:
+                    System.out.println("Opcion invalida");
             }
         }
     }

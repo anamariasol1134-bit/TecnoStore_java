@@ -19,13 +19,25 @@ public class MenuMarca {
             opcion = Entero.leer("Elige: ");
 
             switch (opcion) {
-                case 1: MarcaControl.registrar(); break;
-                case 2: MarcaControl.listar(); break;
-                case 3: MarcaControl.buscar(); break;
-                case 4: MarcaControl.actualizar(); break;
-                case 5: MarcaControl.eliminar(); break;
-                case 6: break;
-                default: System.out.println("Opcion invalida");
+                case 1:
+                    MarcaControl.registrar();
+                    break;
+                case 2:
+                    MarcaControl.listar();
+                    break;
+                case 3:
+                    MarcaControl.buscar();
+                    break;
+                case 4:
+                    MarcaControl.actualizar();
+                    break;
+                case 5:
+                    MarcaControl.eliminar();
+                    break;
+                case 6:
+                    break;
+                default:
+                    System.out.println("Opcion invalida");
             }
         }
     }

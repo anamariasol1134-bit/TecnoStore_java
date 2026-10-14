@@ -19,13 +19,25 @@ public class MenuCelular {
             opcion = Entero.leer("Elige: ");
 
             switch (opcion) {
-                case 1: CelularControl.registrar(); break;
-                case 2: CelularControl.listar(); break;
-                case 3: CelularControl.buscar(); break;
-                case 4: CelularControl.actualizar(); break;
-                case 5: CelularControl.eliminar(); break;
-                case 6: break;
-                default: System.out.println("Opcion invalida");
+                case 1:
+                    CelularControl.registrar();
+                    break;
+                case 2:
+                    CelularControl.listar();
+                    break;
+                case 3:
+                    CelularControl.buscar();
+                    break;
+                case 4:
+                    CelularControl.actualizar();
+                    break;
+                case 5:
+                    CelularControl.eliminar();
+                    break;
+                case 6:
+                    break;
+                default:
+                    System.out.println("Opcion invalida");
             }
         }
     }

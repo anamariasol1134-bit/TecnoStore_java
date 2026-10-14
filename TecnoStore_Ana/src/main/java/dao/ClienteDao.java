@@ -6,19 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import modelo.Cliente;
 import patron.ConexionDB;
 
 public class ClienteDao {
+
     public void insertar(Cliente c) {
         String sqlPersona = "INSERT INTO persona (nombre, identificacion, correo, telefono) VALUES (?, ?, ?, ?)";
         String sqlCliente = "INSERT INTO cliente (id, fecha_ingreso, puntos) VALUES (?, ?, ?)";
         Connection con = ConexionDB.getInstancia().getConexion();
 
         try {
-            con.setAutoCommit(false); 
+            con.setAutoCommit(false);
             int idGenerado;
             try (PreparedStatement ps = con.prepareStatement(sqlPersona, Statement.RETURN_GENERATED_KEYS)) {
                 ps.setString(1, c.getNombre());
@@ -61,15 +61,14 @@ public class ClienteDao {
 
     public List<Cliente> listar() {
         List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT p.id, p.nombre, p.identificacion, p.correo, p.telefono, " +
-                     "c.fecha_ingreso, c.puntos " +
-                     "FROM persona p " +
-                     "JOIN cliente c ON p.id = c.id " +
-                     "ORDER BY p.id";
+        String sql = "SELECT p.id, p.nombre, p.identificacion, p.correo, p.telefono, "
+                + "c.fecha_ingreso, c.puntos "
+                + "FROM persona p "
+                + "JOIN cliente c ON p.id = c.id "
+                + "ORDER BY p.id";
         Connection con = ConexionDB.getInstancia().getConexion();
 
-        try (PreparedStatement ps = con.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+        try (PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 lista.add(crearClienteDesdeRS(rs));
@@ -83,11 +82,11 @@ public class ClienteDao {
 
     public Cliente buscarPorId(int id) {
         Cliente cliente = null;
-        String sql = "SELECT p.id, p.nombre, p.identificacion, p.correo, p.telefono, " +
-                     "c.fecha_ingreso, c.puntos " +
-                     "FROM persona p " +
-                     "JOIN cliente c ON p.id = c.id " +
-                     "WHERE p.id = ?";
+        String sql = "SELECT p.id, p.nombre, p.identificacion, p.correo, p.telefono, "
+                + "c.fecha_ingreso, c.puntos "
+                + "FROM persona p "
+                + "JOIN cliente c ON p.id = c.id "
+                + "WHERE p.id = ?";
         Connection con = ConexionDB.getInstancia().getConexion();
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -106,11 +105,11 @@ public class ClienteDao {
 
     public Cliente buscarPorIdentificacion(String identificacion) {
         Cliente cliente = null;
-        String sql = "SELECT p.id, p.nombre, p.identificacion, p.correo, p.telefono, " +
-                     "c.fecha_ingreso, c.puntos " +
-                     "FROM persona p " +
-                     "JOIN cliente c ON p.id = c.id " +
-                     "WHERE p.identificacion = ?";
+        String sql = "SELECT p.id, p.nombre, p.identificacion, p.correo, p.telefono, "
+                + "c.fecha_ingreso, c.puntos "
+                + "FROM persona p "
+                + "JOIN cliente c ON p.id = c.id "
+                + "WHERE p.identificacion = ?";
         Connection con = ConexionDB.getInstancia().getConexion();
 
         try (PreparedStatement ps = con.prepareStatement(sql)) {

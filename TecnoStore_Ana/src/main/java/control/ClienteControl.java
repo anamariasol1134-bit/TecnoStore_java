@@ -14,7 +14,7 @@ public class ClienteControl {
     static ClienteDao clienteDao = new ClienteDao();
 
     public static void registrar() {
-        System.out.println("\n--- REGISTRAR CLIENTE ---");
+        System.out.println("--- REGISTRAR CLIENTE ---");
         String nombre = Texto.leer("Nombre: ");
         String identificacion = Texto.leer("Identificacion: ");
 
@@ -52,7 +52,7 @@ public class ClienteControl {
         if (clientes.isEmpty()) {
             System.out.println("No hay clientes.");
         } else {
-            System.out.println("\n--- CLIENTES ---");
+            System.out.println("--- CLIENTES ---");
             for (Cliente c : clientes) {
                 System.out.println("ID: " + c.getId() + " - " + c.getNombre()
                         + " - " + c.getIdentificacion() + " - " + c.getCorreo());
@@ -77,16 +77,22 @@ public class ClienteControl {
             System.out.println("No hay clientes para actualizar.");
             return;
         }
-        System.out.println("\n--- CLIENTES ---");
+        System.out.println("--- CLIENTES ---");
         for (Cliente c : clientes) {
             System.out.println("ID: " + c.getId() + " - " + c.getNombre()
                     + " - " + c.getIdentificacion() + " - " + c.getCorreo());
         }
         int id = Entero.leer("ID a actualizar (0 = cancelar): ");
-        if (id == 0) { System.out.println("Cancelada"); return; }
+        if (id == 0) {
+            System.out.println("Cancelada");
+            return;
+        }
 
         Cliente c = clienteDao.buscarPorId(id);
-        if (c == null) { System.out.println("No existe."); return; }
+        if (c == null) {
+            System.out.println("No existe.");
+            return;
+        }
 
         String correo = Texto.leer("Nuevo correo (Enter = mantener): ");
         if (!correo.isEmpty()) {
@@ -119,16 +125,22 @@ public class ClienteControl {
             System.out.println("No hay clientes para eliminar.");
             return;
         }
-        System.out.println("\n--- CLIENTES ---");
+        System.out.println("--- CLIENTES ---");
         for (Cliente c : clientes) {
             System.out.println("ID: " + c.getId() + " - " + c.getNombre()
                     + " - " + c.getIdentificacion());
         }
         int id = Entero.leer("ID a eliminar (0 = cancelar): ");
-        if (id == 0) { System.out.println("Cancelada"); return; }
+        if (id == 0) {
+            System.out.println("Cancelada");
+            return;
+        }
 
         Cliente c = clienteDao.buscarPorId(id);
-        if (c == null) { System.out.println("No existe."); return; }
+        if (c == null) {
+            System.out.println("No existe.");
+            return;
+        }
 
         int op = Entero.leer("Confirma eliminar a " + c.getNombre() + "? (1=Si, 2=No): ");
         if (op == 1) {

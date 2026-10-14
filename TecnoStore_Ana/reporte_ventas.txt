@@ -29,7 +29,7 @@ Fecha: 2026-10-14 08:31:43
 Cliente: Juan Perez
 Empleado: Ana Suarez
 Items:
-  - Xiaomi Redmi Note 13 x1 = $900.000
+  - miau miau Redmi Note 13 x1 = $900.000
 Subtotal: $900.000
 IVA:      $171.000
 TOTAL:    $1.071.000
@@ -70,6 +70,18 @@ IVA:      $29.184
 TOTAL:    $182.784
 -------------------------------------------
 
+Venta ID: 8
+Fecha: 2026-10-14 12:28:42
+Cliente: Juan Perez
+Empleado: Ana Suarez
+Items:
+  - gatito Galaxy S24 x5 = $25.000.000
+  - miau miau Redmi Note 13 x5 = $4.500.000
+Subtotal: $29.500.000
+IVA:      $5.605.000
+TOTAL:    $35.105.000
+-------------------------------------------
+
 ===========================================
-TOTAL GENERAL DE VENTAS: $35.049.784
+TOTAL GENERAL DE VENTAS: $70.154.784
 ===========================================

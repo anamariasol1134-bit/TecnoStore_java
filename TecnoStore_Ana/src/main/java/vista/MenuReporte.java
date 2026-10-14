@@ -18,12 +18,22 @@ public class MenuReporte {
             opcion = Entero.leer("Elige: ");
 
             switch (opcion) {
-                case 1: ReporteControl.stockBajo(); break;
-                case 2: ReporteControl.top3(); break;
-                case 3: ReporteControl.ventasPorMes(); break;
-                case 4: ReporteControl.generarArchivo(); break;
-                case 5: break;
-                default: System.out.println("Opcion invalida");
+                case 1:
+                    ReporteControl.stockBajo();
+                    break;
+                case 2:
+                    ReporteControl.top3();
+                    break;
+                case 3:
+                    ReporteControl.ventasPorMes();
+                    break;
+                case 4:
+                    ReporteControl.generarArchivo();
+                    break;
+                case 5:
+                    break;
+                default:
+                    System.out.println("Opcion invalida");
             }
         }
     }

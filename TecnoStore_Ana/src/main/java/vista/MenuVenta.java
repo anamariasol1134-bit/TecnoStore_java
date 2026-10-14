@@ -17,11 +17,19 @@ public class MenuVenta {
             opcion = Entero.leer("Elige: ");
 
             switch (opcion) {
-                case 1: VentaControl.registrar(); break;
-                case 2: VentaControl.listar(); break;
-                case 3: VentaControl.buscar(); break;
-                case 4: break;
-                default: System.out.println("Opcion invalida");
+                case 1:
+                    VentaControl.registrar();
+                    break;
+                case 2:
+                    VentaControl.listar();
+                    break;
+                case 3:
+                    VentaControl.buscar();
+                    break;
+                case 4:
+                    break;
+                default:
+                    System.out.println("Opcion invalida");
             }
         }
     }

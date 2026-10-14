@@ -178,3 +178,22 @@ CREATE TABLE `log_celulares` (
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO marca (nombre) VALUES 
+('Samsung'),
+('Apple'),
+('Xiaomi'),
+('Motorola'),
+('Huawei');
+
+INSERT INTO sistema_operativo (nombre, version) VALUES 
+('Android', '14'),
+('Android', '13'),
+('iOS', '17'),
+('iOS', '16'),
+('HarmonyOS', '4');
+
+INSERT INTO gama (nombre) VALUES 
+('Alta'),
+('Media'),
+('Baja');

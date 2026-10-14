@@ -1,7 +1,6 @@
 
 package util;
 import java.time.Month;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,10 +14,7 @@ public class ReporteUtils {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Devuelve el Top 3 de celulares más vendidos.
-     * Retorna un Map con modelo -> cantidad vendida.
-     */
+   
     public static Map<String, Integer> top3CelularesMasVendidos(List<Venta> ventas) {
         return ventas.stream()
                 .flatMap(v -> v.getItems().stream())
@@ -37,15 +33,10 @@ public class ReporteUtils {
                 ));
     }
 
-    /**
-     * Devuelve el total de ventas agrupado por mes.
-     * Retorna un Map con mes -> total vendido.
-     */
     public static Map<Month, Double> ventasTotalesPorMes(List<Venta> ventas) {
         return ventas.stream()
                 .collect(Collectors.groupingBy(
                         v -> {
-                            // Convertimos java.util.Date a Month
                             return v.getFecha().toInstant()
                                     .atZone(java.time.ZoneId.systemDefault())
                                     .getMonth();
