@@ -3,11 +3,11 @@ import java.util.Date;
 public class Empleado extends Persona{
     private String cargo;
     private Date fechaIngreso;
-    private long salario;
+    private double salario;
     public Empleado(){
         super(); 
     }
-    public Empleado(String cargo, Date fechaIngreso, long salario, int id, String nombre, String identificacion, String correo, String telefono) {
+    public Empleado(String cargo, Date fechaIngreso, double salario, int id, String nombre, String identificacion, String correo, String telefono) {
         super(id, nombre, identificacion, correo, telefono);
         this.cargo = cargo;
         this.fechaIngreso = fechaIngreso;
@@ -19,7 +19,7 @@ public class Empleado extends Persona{
     public Date getFechaIngreso() {
         return fechaIngreso;
     }
-    public long getSalario() {
+    public double getSalario() {
         return salario;
     }
     public void setCargo(String cargo) {
@@ -28,7 +28,7 @@ public class Empleado extends Persona{
     public void setFechaIngreso(Date fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
-    public void setSalario(long salario) {
+    public void setSalario(double salario) {
         this.salario = salario;
     }
     @Override
